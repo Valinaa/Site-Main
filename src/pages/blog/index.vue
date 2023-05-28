@@ -1,23 +1,10 @@
-<!--
- * @GitHub       : https://github.com/Valinaa
- * @Author       : Valinaa
- * @Date         : 2023-05-14 15:19:46
- * @LastEditors  : Valinaa 1114854003@qq.com
- * @LastEditTime : 2023-05-28 14:32:44
- * @FilePath     : \\vue3-camp\\src\\pages\\blog\\index.vue
- * @Description  : 主页组件
- *
- * WeChat:Wish-Komorebi
- * Copyright (c) 2023 by Valinaa Chan www.valinaa-wei.tech, All Rights Reserved.
--->
-
 <!-- eslint-disable camelcase -->
 <template>
     <div class="container max-w-3xl mx-auto mt-10">
         <div class="h-60 mb-8">
             <div class="w-52 h-52 mx-auto mb-4">
                 <img
-                    src="@/assets/svg/android-chrome-192x192.png"
+                    src="/src/assets/svg/website.png"
                     alt="logo"
                     class="w-52 h-52" />
             </div>

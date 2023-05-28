@@ -1,15 +1,3 @@
-<!--
- * @GitHub       : https://github.com/Valinaa
- * @Author       : Valinaa
- * @Date         : 2022-07-28 18:31:56
- * @LastEditors  : Valinaa 1114854003@qq.com
- * @LastEditTime : 2023-05-28 01:21:06
- * @FilePath     : \\vue3-camp\\src\\components\\NavBar.vue
- * @Description  : 导航栏组件
- *
- * WeChat:Wish-Komorebi
- * Copyright (c) 2022 by Valinaa 1114854003@qq.com, All Rights Reserved.
--->
 <template>
     <el-menu
         class="font-mono font-bold nav-bar"
@@ -23,7 +11,7 @@
             ">
             <el-avatar
                 :size="55"
-                src="src/assets/avatar.jpg" />
+                src="/src/assets/avatar.jpg" />
         </div>
         <el-menu-item
             index="/"
