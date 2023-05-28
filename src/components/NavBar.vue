@@ -98,6 +98,7 @@
 </template>
 <script lang="ts" setup>
 import router from '@/router'
+import { saveLanguage } from '@/utils/i18n'
 
 import { ElMessageBox } from 'element-plus'
 import SolarHomeOutline from '~icons/solar/home-outline'
@@ -108,6 +109,7 @@ const { t, availableLocales, locale } = useI18n()
 const toggleLocales = () => {
     const locales = availableLocales
     locale.value = locales[(locales.indexOf(locale.value) + 1) % locales.length]
+    saveLanguage(locale.value) // 保存切换后的语言到本地存储
 }
 const ellipsis = ref(false)
 

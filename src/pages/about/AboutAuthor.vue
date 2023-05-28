@@ -29,7 +29,7 @@
                     <el-table-column
                         :label="t('category')"
                         align="center"
-                        width="180">
+                        width="185">
                         <template #default="{ row }">
                             {{
                                 row.category === '0'
@@ -318,6 +318,7 @@ const tableData = ref([
 
 const objectSpanMethod = ({
     row,
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     column,
     rowIndex,
     columnIndex,

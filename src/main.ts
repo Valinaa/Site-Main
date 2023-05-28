@@ -18,9 +18,10 @@ import 'virtual:windi.css'
 // Devtools: https://windicss.org/integrations/vite.html#design-in-devtools
 import 'virtual:windi-devtools'
 import '@/assets/styles/index.scss'
+import { getSavedLanguage } from './utils/i18n'
 
 const i18n = createI18n({
-    locale: 'zh-CN',
+    locale: getSavedLanguage() || 'zh-CN',
     messages,
 })
 

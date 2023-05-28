@@ -86,5 +86,13 @@
     "computers": "计算机原理",
     "components": "大数据组件",
     "see skills": "看看我都会些啥 ?",
-    "skills list": "技能小清单"
+    "skills list": "技能小清单",
+    "welcome": "热烈欢迎 !",
+    "issue": "如果在使用过程中出现了任何问题, 请在该项目下提出Issue",
+    "personal site": " 的个人网站",
+    "coming soon": "该网站尚在开发中，敬请期待！",
+    "data analysis module not available": "大数据分析平台模块暂未开放",
+    "try clicking the button below": "您可以尝试点击下方按钮",
+    "if the response is successful": "若返回成功",
+    "it means it is already available": "说明已经对外开放"
 }

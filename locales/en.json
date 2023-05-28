@@ -86,5 +86,13 @@
     "computers": "Computer Principle",
     "components": "Big Data Component",
     "see skills": "See what skills I have",
-    "skills list": "Skills List"
+    "skills list": "Skills List",
+    "welcome": "Welcome !",
+    "issue": "If you encounter problems in using the template, please raise them in the Issue",
+    "personal site": "'s personal site",
+    "coming soon": "This website is under development. Stay tuned!",
+    "data analysis module not available": "The data analysis module is not available now",
+    "try clicking the button below": "You can try clicking the button below",
+    "if the response is successful": "If the response is successful",
+    "it means it is already available": "it means it is already available!"
 }
