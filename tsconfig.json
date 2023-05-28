@@ -36,19 +36,10 @@
         "src/**/*.d.ts",
         "src/*.d.ts",
         "src/**/*.tsx",
-        "src/**/*.vue",
-        "*.html",
-        "vite.config.ts",
-        "windi.config.ts",
-        "presets/**/*.ts"
+        "src/**/*.vue"
     ],
     // 编译器默认排除的编译文件
     "exclude": [
         "node_modules"
-    ],
-    "references": [
-        {
-            "path": "./tsconfig.node.json"
-        }
     ]
 }
