@@ -1,12 +1,14 @@
 /* eslint-disable @typescript-eslint/no-unsafe-call */
-import { defineConfig } from 'vite'
+import { defineConfig, loadEnv } from 'vite'
 import { resolve } from 'path'
 import presets from './presets/presets'
 
 export default defineConfig((env) => {
+    // env 环境变量
+    const viteEnv = loadEnv(env.mode, process.cwd())
     return {
         // envDir: resolve(__dirname),
-        base: './',
+        base: viteEnv.VITE_BASE || './',
         plugins: [presets(env)],
         resolve: {
             alias: {
