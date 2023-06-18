@@ -10,6 +10,9 @@ export default defineConfig((env) => {
         // envDir: resolve(__dirname),
         base: viteEnv.VITE_BASE || './',
         plugins: [presets(env)],
+        esbuild: {
+            drop: ['console', 'debugger'],
+        },
         resolve: {
             alias: {
                 '@': resolve(__dirname, 'src'), // 把 @ 指向到 src 目录去

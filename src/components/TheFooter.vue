@@ -1,20 +1,15 @@
 <template>
-    <footer class="footer">
-        <div class="container">
-            <p class="color-text">
-                &copy; 2023
-                <b>www.valinaa-wei.tech</b>
-                All rights reserved.
-            </p>
-        </div>
-    </footer>
+    <div class="text-center container">
+        <p class="color-text">
+            &copy; 2023
+            <b>www.valinaa-wei.tech</b>
+        </p>
+        <br />
+        <p class="color-text">All rights reserved.</p>
+    </div>
 </template>
 
 <style lang="scss" scoped>
-.footer {
-    padding-top: 20px;
-}
-
 .container {
     margin: 0 auto;
 }

@@ -1,38 +1,309 @@
-<script setup lang="ts">
-import zhCn from 'element-plus/lib/locale/lang/zh-cn'
-
-const locale = zhCn
-</script>
-
 <template>
-    <div class="app-container">
-        <el-config-provider :locale="locale">
-            <el-container class="main-container">
-                <el-header>
-                    <NavBar />
-                </el-header>
+    <el-config-provider :locale="locale">
+        <el-container class="app-container">
+            <el-header>
+                <BootNav />
+            </el-header>
+            <el-container>
+                <el-aside :width="Collapse ? '90.5px' : '220px'">
+                    <el-menu
+                        class="side-bar font-mono font-bold"
+                        default-active="/"
+                        :collapse="Collapse"
+                        @mouseover="goCollapse"
+                        @mouseleave="leaveCollapse">
+                        <el-menu-item
+                            index="/"
+                            @click="goIndexPage()">
+                            <i>
+                                <IFluentHome20Regular />
+                            </i>
+                            <span>{{ t('home') }}</span>
+                        </el-menu-item>
+                        <el-sub-menu
+                            index="1"
+                            class="side-menu">
+                            <template #title>
+                                <i class="sub-menu-icon">
+                                    <i-ep-trend-charts />
+                                </i>
+                                <span>{{ t('data analysis platform') }}</span>
+                            </template>
+                            <el-menu-item-group
+                                :title="t('meta data management')">
+                                <el-menu-item
+                                    index="1-1"
+                                    @click="getPublicData()">
+                                    <i class="menu-item-icon">
+                                        <i-vaadin-table />
+                                    </i>
+                                    <span>{{ t('view public data') }}</span>
+                                </el-menu-item>
+                                <el-menu-item
+                                    index="1-2"
+                                    @click="ViewPublicData()">
+                                    <i class="menu-item-icon">
+                                        <i-ep-edit />
+                                    </i>
+                                    <span>{{ t('editing interface') }}</span>
+                                </el-menu-item>
+                            </el-menu-item-group>
+                            <el-menu-item-group
+                                :title="t('analysis management')">
+                                <el-menu-item
+                                    index="1-3"
+                                    @click="ViewAnalysis()">
+                                    <i class="menu-item-icon">
+                                        <i-ep-edit />
+                                    </i>
+                                    <span>{{ t('editing interface') }}</span>
+                                </el-menu-item>
+                            </el-menu-item-group>
+                            <el-menu-item-group
+                                :title="t('dashboard management')">
+                                <el-menu-item
+                                    index="1-4"
+                                    @click="getDashboardData()">
+                                    <i class="menu-item-icon">
+                                        <i-vaadin-table />
+                                    </i>
+                                    <span>{{ t('view dashboard info') }}</span>
+                                </el-menu-item>
+                                <el-menu-item
+                                    index="1-5"
+                                    @click="viewDashboard()">
+                                    <i class="menu-item-icon">
+                                        <i-vscode-icons-file-type-qlikview />
+                                    </i>
+                                    <span>
+                                        {{ t('view default dashboard') }}
+                                    </span>
+                                </el-menu-item>
+                                <el-menu-item
+                                    index="1-6"
+                                    @click="editDashboard()">
+                                    <i class="menu-item-icon">
+                                        <i-ep-edit-pen />
+                                    </i>
+                                    <span>
+                                        {{ t('edit default dashboard') }}
+                                    </span>
+                                </el-menu-item>
+                            </el-menu-item-group>
+                            <el-sub-menu index="1-7">
+                                <template #title>item four</template>
+                                <el-menu-item index="1-7-1">
+                                    item one
+                                </el-menu-item>
+                            </el-sub-menu>
+                        </el-sub-menu>
+                        <el-menu-item index="2">
+                            <i>
+                                <IFluentHome20Regular />
+                            </i>
+                            <span>Navigator Two</span>
+                        </el-menu-item>
+                        <el-menu-item
+                            index="3"
+                            disabled>
+                            <i>
+                                <IFluentHome20Regular />
+                            </i>
+                            <span>Navigator Three</span>
+                        </el-menu-item>
+                    </el-menu>
+                </el-aside>
                 <el-container>
-                    <el-aside v-if="$route.path === '/blog'">
-                        <SideBar />
-                    </el-aside>
-                    <el-container>
-                        <el-main>
-                            <router-view />
-                        </el-main>
-                        <el-footer>
-                            <TheFooter />
-                        </el-footer>
-                    </el-container>
+                    <el-main>
+                        <router-view />
+                    </el-main>
+                    <el-footer>
+                        <TheFooter />
+                    </el-footer>
                 </el-container>
             </el-container>
-        </el-config-provider>
-    </div>
+        </el-container>
+    </el-config-provider>
 </template>
+<script lang="ts" setup>
+import zhCn from 'element-plus/lib/locale/lang/zh-cn'
+import BILoginStore from '@/store/finebi'
+import JSONP, { isResponseData } from '@/utils/jsonp'
+import router from '@/router'
+import {
+    DashBoardUserInfoResponse,
+    PublicFolderResponse,
+    ResponseData,
+} from '@/types'
+
+const locale = zhCn
+
+const { t } = useI18n()
+const useBILoginStore = BILoginStore()
+const { getToken, setData } = useBILoginStore
+const Collapse = ref(true)
+const goCollapse = () => {
+    Collapse.value = false
+}
+const leaveCollapse = () => {
+    Collapse.value = true
+}
+const ViewPublicData = () => {
+    const url = `http://master:8080/webroot/decision/v5/api/conf/page?fine_auth_token=${getToken()}`
+    window.open(url, '_blank')
+}
+const ViewAnalysis = () => {
+    const url = `http://master:8080/webroot/decision/v5/api/page/analysis?fine_auth_token=${getToken()}`
+    window.open(url, '_blank')
+}
+const viewDashboard = () => {
+    const dashboardId = 'fe0e26b97ea84772a41450a638214d75'
+    const url = `http://master:8080/webroot/decision/v5/design/report/${dashboardId}/view?fine_auth_token=${getToken()}`
+    window.open(url, '_blank')
+}
+const editDashboard = () => {
+    const dashboardId = 'fe0e26b97ea84772a41450a638214d75'
+    const url = `http://master:8080/webroot/decision/v5/design/report/${dashboardId}/edit?fine_auth_token=${getToken()}`
+    window.open(url, '_blank')
+}
+const goIndexPage = () => {
+    void router.push('/')
+}
+const isDashboardResponse = (
+    obj: DashBoardUserInfoResponse | ResponseData | PublicFolderResponse
+): obj is DashBoardUserInfoResponse => {
+    if ('data' in obj && obj.data) {
+        if ('dashboards' in obj.data) {
+            return true
+        }
+    }
+    return false
+}
+const encodedData = (data: unknown) => {
+    return encodeURIComponent(JSON.stringify(data))
+}
+const getPublicData = () => {
+    const url = `/v5/api/conf/groups?fine_auth_token=${getToken()}`
+    JSONP(url, {
+        timeout: 10000,
+    })
+        .then((data) => {
+            if (!isResponseData(data)) {
+                // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+                const res = data.data
+                ElMessage.info({
+                    message: '已接收到公共表数据',
+                })
+                // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
+                console.log(`编码前:${res}`)
+                // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
+                const encode = encodedData(res)
+                void router.push(`/table/publicDir/${encode}`)
+            } else {
+                ElMessage.error({
+                    // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
+                    message: `<b>您似乎没有登录或登录已过期</b> <br/> <i>${data.errorMsg}</i>`,
+                    dangerouslyUseHTMLString: true,
+                })
+            }
+            return data
+        })
+        .catch((err) => {
+            ElMessage.error({
+                message: `<b>公共表信息获取失败!</b> <br/> <i>${err}</i>`,
+                dangerouslyUseHTMLString: true,
+            })
+        })
+}
+const getDashboardData = () => {
+    const url = `/v5/api/dashboard/user/info?fine_auth_token=${getToken()}`
+    JSONP(url, {
+        timeout: 10000,
+    })
+        .then((data) => {
+            if (isDashboardResponse(data)) {
+                // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+                const { dashboards } = data.data
+                ElMessage.info({
+                    message: '已接收到仪表板数据',
+                })
+                // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
+                console.log(`编码前:`)
+                console.log(dashboards)
+                // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
+                const encode = encodedData(dashboards)
+                setData(encode)
+                void router.push(`/table/dashboards`)
+            } else {
+                ElMessage.error({
+                    // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
+                    message: `<b>您似乎没有登录或登录已过期</b> <br/> <i>${data.errorMsg}</i>`,
+                    dangerouslyUseHTMLString: true,
+                })
+            }
+
+            return data
+        })
+        .catch((err) => {
+            ElMessage.error({
+                message: `<b>Dashboards信息获取失败!</b> <br/> <i>${err}</i>`,
+                dangerouslyUseHTMLString: true,
+            })
+        })
+}
+</script>
+<style lang="scss" scoped>
+.side-bar {
+    border-right: solid 1px var(--el-border-color);
+}
+
+.el-menu-item * {
+    vertical-align: middle;
+}
+
+.el-sub-menu * {
+    vertical-align: middle;
+}
+
+.sub-menu-icon {
+    display: block;
+    width: 50px;
+    text-align: center;
+}
+
+.menu-item-icon {
+    display: block;
+    width: 25px !important;
+    margin-bottom: 4px !important;
+    text-align: left !important;
+}
+
+.el-menu-item > i {
+    width: 50px;
+    text-align: center;
+}
+
+/* stylelint-disable-next-line selector-class-pattern */
+.el-menu--collapse {
+    min-width: 82px;
+}
+/* stylelint-disable-next-line selector-class-pattern */
+.el-menu--collapse .el-sub-menu--collapse > .el-menu {
+    flex: 1;
+    overflow: hidden;
+}
+
+/* stylelint-disable-next-line selector-class-pattern */
+.side-bar:not(.el-menu--collapse) {
+    width: 220px;
+}
+</style>
 <style lang="scss">
 .app-container {
-    z-index: 100;
-    display: flex;
-    flex-direction: column;
+    // z-index: 100;
+    //     flex: 1;
+    // display: flex;
+    // flex-direction: column;
     height: 100%;
     background-image: linear-gradient(
         326deg,
@@ -53,12 +324,6 @@ const locale = zhCn
     );
 }
 
-.main-container {
-    display: flex;
-    flex: 1;
-    flex-direction: column;
-}
-
 .el-footer {
     margin-top: auto; /* 将 el-footer 推至页面底部 */
     text-align: center;
@@ -66,20 +331,63 @@ const locale = zhCn
 
 .el-aside {
     display: flex;
+    width: auto;
 
     --el-menu-icon-width: 0;
 }
 
 .el-header {
     padding: 0;
+
+    --el-header-height: inherit;
 }
 
 .el-main {
     min-height: 610px;
 }
 
+.navbar {
+    --bs-navbar-padding-y: 0 !important;
+}
+
+.dropdown-toggle {
+    margin-bottom: 2px;
+}
+
+.dark .dropdown-menu {
+    --bs-dropdown-bg: black;
+}
+
+.dark .dropdown-item:hover,
+.dropdown-item:focus {
+    background-color: #5d6d7e !important;
+}
+
+.dropdown-item:hover,
+.dropdown-item:focus {
+    background-color: #ccd1d1 !important;
+}
+
+.dark .dropdown-item {
+    color: white !important;
+}
+
+.nav-item {
+    width: 100px;
+}
+
+.container,
+.container-fluid,
+.container-xxl,
+.container-xl,
+.container-lg,
+.container-md,
+.container-sm {
+    --bs-gutter-x: 0 !important;
+}
+
 :root {
-    --el-aside-width: 220px;
+    // --el-aside-width: 220px;
     --el-menu-bg-color: transparent;
     --el-menu-border-color: transparent;
 }

@@ -1,23 +1,21 @@
-<!--
- * @GitHub       : https://github.com/Valinaa
- * @Author       : Valinaa 1114854003@qq.com
- * @Date         : 2022-07-28 13:20:16
- * @LastEditors  : Valinaa 1114854003@qq.com
- * @LastEditTime : 2023-05-27 01:23:40
- * @FilePath     : \\vue3-camp\\src\\components\\SideBar.vue
- * @Description  : 侧边栏组件
- *
- * WeChat:Wish-Komorebi
- * Copyright (c) 2022 by Valinaa 1114854003@qq.com, All Rights Reserved.
--->
-
 <template>
+    <!-- <div class="sidebar-toggle">
+        <Icon
+            class="shrink-btn"
+            :icon="
+                Collapse
+                    ? 'iconamoon:arrow-right-2-bold'
+                    : 'iconamoon:arrow-left-2-bold'
+            "
+            width="32"
+            height="32"
+            @click="toggleCollapse" />
+    </div> -->
     <el-menu
-        class="side-bar"
-        default-active="mainView"
+        class="side-bar font-mono font-bold"
+        default-active="/"
         :collapse="Collapse"
         @mouseover="goCollapse"
-        @click="goCollapse"
         @mouseleave="leaveCollapse">
         <el-menu-item
             index="/"
@@ -105,19 +103,12 @@
             </i>
             <span>Navigator Three</span>
         </el-menu-item>
-        <el-menu-item
-            index="/main/info"
-            @click="goAboutAuthor()">
-            <i>
-                <i-ep-credit-card />
-            </i>
-            <span>{{ t('self info management') }}</span>
-        </el-menu-item>
     </el-menu>
 </template>
 <script lang="ts" setup>
 import BILoginStore from '@/store/finebi'
 import JSONP, { isResponseData } from '@/utils/jsonp'
+import { Icon } from '@iconify/vue'
 import router from '@/router'
 import {
     DashBoardUserInfoResponse,
@@ -135,11 +126,6 @@ const goCollapse = () => {
 const leaveCollapse = () => {
     Collapse.value = true
 }
-
-const goAboutAuthor = () => {
-    void router.push('/about')
-}
-
 const ViewPublicData = () => {
     const url = `http://master:8080/webroot/decision/v5/api/conf/page?fine_auth_token=${getToken()}`
     window.open(url, '_blank')
@@ -244,7 +230,20 @@ const getDashboardData = () => {
         })
 }
 </script>
-<style scoped>
+<style lang="scss" scoped>
+.shrink-btn {
+    position: absolute;
+    z-index: 9999;
+    top: 305px;
+    left: -22px;
+
+    /* color: #151d41; */
+    margin-left: 100px;
+    cursor: pointer;
+
+    /* transform: rotate(180deg); */
+}
+
 .side-bar {
     border-right: solid 1px var(--el-border-color);
 }

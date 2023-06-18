@@ -1,16 +1,3 @@
-/*
- * @GitHub       : https://github.com/Valinaa
- * @Author       : Valinaa
- * @Date         : 2023-04-22 00:03:06
- * @LastEditors  : Valinaa 1114854003@qq.com
- * @LastEditTime : 2023-05-28 01:19:09
- * @FilePath     : \\vue3-camp\\presets\\presets.ts
- * @Description  : 配置vite插件
- *
- * WeChat:Wish-Komorebi
- * Copyright (c) 2023 by ${git_name_email}, All Rights Reserved.
- */
-
 import vue from '@vitejs/plugin-vue'
 import vueJsx from '@vitejs/plugin-vue-jsx'
 import eslint from 'vite-plugin-eslint'
@@ -22,6 +9,7 @@ import IconsResolver from 'unplugin-icons/resolver'
 import {
     ElementPlusResolver,
     VueUseComponentsResolver,
+    BootstrapVueNextResolver,
 } from 'unplugin-vue-components/resolvers'
 import {
     createStyleImportPlugin,
@@ -31,7 +19,7 @@ import WindiCSS from 'vite-plugin-windicss'
 import Markdown from 'vite-plugin-vue-markdown'
 import Prism from 'markdown-it-prism'
 import Unfonts from 'unplugin-fonts/vite'
-import VueI18n from '@intlify/vite-plugin-vue-i18n'
+import VueI18nPlugin from '@intlify/unplugin-vue-i18n/vite'
 import LinkAttributes from 'markdown-it-link-attributes'
 import { ConfigEnv } from 'vite'
 import { resolve } from 'path'
@@ -112,6 +100,7 @@ export default (env: ConfigEnv) => {
                 ElementPlusResolver(),
                 IconsResolver(),
                 VueUseComponentsResolver(),
+                BootstrapVueNextResolver(),
             ],
         }),
         Icons({
@@ -123,7 +112,7 @@ export default (env: ConfigEnv) => {
                 families: ['Open Sans', 'Montserrat', 'Fira Sans'],
             },
         }),
-        VueI18n({
+        VueI18nPlugin({
             include: [resolve(__dirname, '../locales/**')],
         }),
         WindiCSS({

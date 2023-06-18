@@ -11,29 +11,57 @@
             ">
             <el-avatar
                 :size="55"
-                src="/src/assets/avatar.jpg" />
+                :src="avatar" />
         </div>
         <el-menu-item
-            index="/"
+            index="main"
             style="width: 90px"
-            @click="goIndexPage()">
+            @click="goPage('www')">
             <i class="menu-item-icon">
-                <SolarHomeOutline />
+                <Icon
+                    icon="solar:home-outline"
+                    width="20.15"
+                    height="20.15" />
             </i>
             {{ t('home') }}
         </el-menu-item>
         <el-menu-item
-            index="disabled"
-            style="width: 130px"
-            disabled>
+            index="blog"
+            style="width: 90px"
+            @click="goPage('blog')">
             <i class="menu-item-icon">
-                <IBiGift />
+                <Icon
+                    icon="solar:document-add-broken"
+                    width="20.15"
+                    height="20.15" />
             </i>
-            {{ t('more extends') }}...
+            {{ t('blog') }}
+        </el-menu-item>
+        <el-menu-item
+            index="muse"
+            style="width: 90px"
+            @click="goPage('muse')">
+            <i class="menu-item-icon">
+                <i-tabler-bulb />
+            </i>
+            {{ t('muse') }}
+        </el-menu-item>
+        <el-menu-item
+            index="life"
+            style="width: 90px"
+            @click="goPage('life')">
+            <i class="menu-item-icon">
+                <Icon
+                    icon="mingcute:fork-spoon-line"
+                    width="20.15"
+                    height="20.15" />
+            </i>
+            {{ t('life') }}
         </el-menu-item>
 
-        <div class="flex-grow" />
+        <div class="flex-grow media-menu" />
         <el-tooltip
+            class="media-menu"
             :content="isDark ? t('change light') : t('change dark')"
             placement="top">
             <button
@@ -41,22 +69,34 @@
                 @click="toggleDark()">
                 <i-ph-cloud-moon-bold
                     v-if="isDark"
-                    class="icon-nav mx-1" />
+                    class="icon-nav mx-1 mt-1" />
                 <i-ph-sun-horizon-bold
                     v-else
-                    class="icon-nav mx-1" />
+                    class="icon-nav mx-1 mt-1" />
             </button>
         </el-tooltip>
         <el-tooltip
+            class="media-menu"
             :content="t('change lang')"
             placement="top">
             <button
                 class="icon-btn mx-2"
                 @click="toggleLocales()">
-                <i-la-language class="icon-nav" />
+                <i-la-language class="icon-nav mr-2 mt-1" />
             </button>
         </el-tooltip>
+        <el-menu-item
+            class="media-menu"
+            index="intro"
+            style="width: 90px"
+            @click="goPage('intro')">
+            <i class="menu-item-icon">
+                <i-carbon-user-speaker class="mr-1" />
+            </i>
+            {{ t('intro') }}
+        </el-menu-item>
         <el-sub-menu
+            class="media-menu"
             index="3"
             style="width: 130px">
             <template #title>
@@ -85,11 +125,10 @@
     <el-backtop />
 </template>
 <script lang="ts" setup>
-import router from '@/router'
+import avatar from '@/assets/avatar.jpg'
 import { saveLanguage } from '@/utils/i18n'
-
 import { ElMessageBox } from 'element-plus'
-import SolarHomeOutline from '~icons/solar/home-outline'
+import { Icon } from '@iconify/vue'
 
 const isDark = useDark()
 const toggleDark = useToggle(isDark)
@@ -101,8 +140,9 @@ const toggleLocales = () => {
 }
 const ellipsis = ref(false)
 
-const goIndexPage = () => {
-    void router.push('/')
+const goPage = (path: string) => {
+    const url = `https://${path}.valinaa-wei.tech`
+    window.location.href = url
 }
 const goGitHub = () => {
     window.open('https://github.com/Valinaa')
@@ -153,5 +193,12 @@ const getEmails = () => {
 /* stylelint-disable-next-line selector-class-pattern */
 .el-sub-menu__title * {
     vertical-align: middle;
+}
+
+/* stylelint-disable-next-line media-feature-range-notation */
+@media screen and (max-width: 768) {
+    .media-menu {
+        display: none;
+    }
 }
 </style>

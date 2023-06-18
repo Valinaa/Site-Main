@@ -4,7 +4,7 @@
         <div class="h-60 mb-8">
             <div class="w-52 h-52 mx-auto mb-4">
                 <img
-                    src="/src/assets/svg/website.png"
+                    src="/src/assets/logos/android-chrome-192x192.png"
                     alt="logo"
                     class="w-52 h-52" />
             </div>
@@ -62,7 +62,7 @@ ElNotification({
     title: 'Issue',
     message: `${t(
         'issue'
-    )}<br/><b><i>https://github.com/Valinaa/Site-Pages/issues<i/><b/>`,
+    )}<br/><b><i>https://github.com/Valinaa/WebSite/issues<i/><b/>`,
     dangerouslyUseHTMLString: true,
     duration: 0,
 })

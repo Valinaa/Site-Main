@@ -16,7 +16,7 @@
             "dom"
         ],
         "types": [
-            "@intlify/vite-plugin-vue-i18n/client",
+            "@intlify/unplugin-vue-i18n/messages",
             "pinia-plugin-persist"
         ],
         // baseUrl来告诉编译器到哪里去查找模块，所有非相对模块导入都会被当做相对于 baseUrl。

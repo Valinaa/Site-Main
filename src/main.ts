@@ -2,7 +2,7 @@
 
 // i18n
 import { createI18n } from 'vue-i18n'
-import messages from '@intlify/vite-plugin-vue-i18n/messages'
+import messages from '@intlify/unplugin-vue-i18n/messages'
 
 // vue router
 import router from '@/router/index'
@@ -12,7 +12,10 @@ import store from '@/store'
 
 // eslint-disable-next-line import/default
 import App from './App.vue'
-
+// eslint-disable-next-line import/no-extraneous-dependencies
+import 'bootstrap/dist/css/bootstrap.css'
+// eslint-disable-next-line import/no-extraneous-dependencies
+import 'bootstrap-vue-next/dist/bootstrap-vue-next.css'
 import 'virtual:windi.css'
 
 // Devtools: https://windicss.org/integrations/vite.html#design-in-devtools
