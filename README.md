@@ -1,7 +1,7 @@
 <br>
 
 <p align='center'>
-<a href="https://www.valinaa-wei.tech/blog">Live Demo</a>
+<a href="https://main.valinaa-wei.tech">Live Demo</a>
 </p>
 
 <br>
@@ -51,28 +51,6 @@
   + [Prettier - Code formatter](https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode) - Focus on code formatting and beautifying code
   + [Stylelint - A mighty CSS linter](https://marketplace.visualstudio.com/items?itemName=stylelint.vscode-stylelint) - Helps you avoid errors and enforce conventions
   + [EditorConfig for VS Code](https://marketplace.visualstudio.com/items?itemName=EditorConfig.EditorConfig) - Coding style check
-
-## Project Catalog
-
-* locales
-  + en.json *(English Mapping of Internationalized Languages)*
-  + zh-CN.json *(Chinese Mapping of Internationalized Languages)*
-* node_modules
-* presets
-  + presets.ts *(vite.config.ts Plugins Configuration)*
-* src
-  + assets *(Static Files)*
-  + components *(Public Components)*
-  + pages *(Private Components for Different Routes)*
-  + router
-  + store
-  + utils
-    - code.ts *(Encapsulation of Code Message)*
-    - format.ts *(Encapsulation of JSON to URL)*
-    - http.ts *(Encapsulation of Axios Config and Init)*
-    - jsonp.ts *(Encapsulation of JSONP Request)*
-  + views *(Such as 404.vue)*
-
 ## Start Now
 
 ### 1. GitHub Template
