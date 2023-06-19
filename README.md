@@ -1,7 +1,7 @@
 <br>
 
 <p align='center'>
-<a href="https://www.valinaa-wei.tech/blog">Live Demo</a>
+<a href="https://main.valinaa-wei.tech">Live Demo</a>
 </p>
 
 <br>
