@@ -52,27 +52,6 @@
   + [ESLint](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint) - 代码质量和规则检查
   + [Prettier - Code formatter](https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode) - 专注于代码格式化、美化代码
   + [EditorConfig for VS Code](https://marketplace.visualstudio.com/items?itemName=EditorConfig.EditorConfig) - 编码风格检查
-* locales
-
-  + en.json *(国际化语言的英文映射)*
-  + zh-CN.json *(国际化语言的中文映射)*
-* node_modules
-* presets
-
-  + presets.ts *(vite.config.ts 插件配置)*
-* src
-
-  + assets *(静态文件)*
-  + components *(公共组件)*
-  + pages *(不同路由的私有组件)*
-  + router
-  + store
-  + utils
-    - code.ts *(封装状态码)*
-    - format.ts *(封装JSON to URL函数)*
-    - http.ts *(封装Axios)*
-    - jsonp.ts *(封装 JSONP 请求)*
-  + views *(例如 404.vue)*
 
 ## 现在开始吧
 
